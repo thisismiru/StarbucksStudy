@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+@Observable
+class LoginViewModel {
+    // MARK: - Properties
+    var id: String = ""
+    var password: String = ""
+}

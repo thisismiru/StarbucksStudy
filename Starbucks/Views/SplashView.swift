@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+/// 스플래쉬 뷰
 struct SplashView: View {
     
+    // MARK: - body
     var body: some View {
         
         ZStack(alignment: .center) {

@@ -7,8 +7,13 @@
 
 import SwiftUI
 
-/// 로그인 화면 View
+/// 로그인 화면 뷰
 struct LoginView: View {
+    
+    // MARK: - Properties
+    @Bindable var loginViewModel: LoginViewModel = .init()
+    @FocusState private var isIdFocused: Bool
+    @FocusState private var isPwFocused: Bool
     
     // MARK: - body
     
@@ -28,7 +33,6 @@ struct LoginView: View {
             loginGroup
             
         }
-        // safeArea인 이유 설명
         .safeAreaPadding(.horizontal, 19)
         .safeAreaPadding(.bottom, 63)
         
@@ -44,16 +48,13 @@ struct LoginView: View {
             titleText
             
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private var logoImage: some View {
-        HStack {
-            Image("starbucksLogo")
-                .resizable()
-                .frame(width: 97, height: 95)
-            
-            Spacer()
-        }
+        Image("starbucksLogo")
+            .resizable()
+            .frame(width: 97, height: 95)
     }
     
     private var titleText: some View {
@@ -71,11 +72,11 @@ struct LoginView: View {
     private var idGroup: some View {
         VStack(spacing: 47) {
             
-            idTextField
+            LoginTextField(text: $loginViewModel.id, placeholder: "아이디", isFocused: $isIdFocused)
             
-            passwordTextField
+            LoginTextField(text: $loginViewModel.id, placeholder: "비밀번호", isFocused: $isPwFocused)
             
-            loginButton
+            MainButton(text: "로그인하기", height: 46, action: {})
             
         }
     }
@@ -96,17 +97,6 @@ struct LoginView: View {
                 .font(.regular13)
                 .foregroundStyle(.black01)
             Divider()
-        }
-    }
-    
-    private var loginButton: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .foregroundStyle(.green01)
-                .frame(width: .infinity, height: 46)
-            Text("로그인하기")
-                .font(.medium16)
-                .foregroundStyle(.white)
         }
     }
     
@@ -146,38 +136,3 @@ struct LoginView: View {
 #Preview {
     LoginView()
 }
-
-/*
- 
- 스터디 운영법
- 
- 0. PARA 폴더 정리법 알려주기
- 
- 1. 주차별 순서 정하기
-    - 내일은 미르 스타트
-    - 각 주차당 한 명씩
- 2. 주차별 손그림 올리기
-    - 다같이 올리기
- 
- 3. 조사 기반 토의부터 하기
- 4. 발표자가 얘기하구, 하나씩 하고, 다르게 조사한 사람?? 물어보기
- 5. 트러블 공유
-    - extra tuist 공유
-    - 문법 공유
-    - 실습
-    - 과제 코드********
- 6. 과제 발표 및 공유
-    - 발표자 컴퓨터 띄우기
-    - 손그림이랑 같이 보이면서 어떻게 했는지 설명하기
-    - 발표자 기준 본인이 전달하고 싶은 꿀팁(?) 혹은 겪었던 문제 상황 말하기
-    - 돌아가면서 진행하기
- 7. 모두 다같이 찾아야 하는 코드!!
-    - 발표자꺼에서 Deprecated 썼는가? 찾기
- 
- */
-
-/*
- 
- 폰트 파일 어떤거 적용해야 하는지 알려주기 (용량에 맞춰서)
- 
- */
