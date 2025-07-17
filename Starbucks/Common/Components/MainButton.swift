@@ -23,7 +23,8 @@ struct MainButton: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundStyle(.green01)
-                    .frame(width: .infinity, height: height)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: height)
                 Text(text)
                     .font(.medium16)
                     .foregroundStyle(.white)

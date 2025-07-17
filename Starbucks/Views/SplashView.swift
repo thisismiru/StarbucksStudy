@@ -17,7 +17,7 @@ struct SplashView: View {
             
             Color.green01
             
-            Image("starbucksLogo")
+            Image(.starbucksLogo)
                 .resizable()
                 .frame(width: 168, height: 168)
             

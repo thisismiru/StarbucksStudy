@@ -11,6 +11,9 @@ import SwiftUI
 struct SignupView: View {
     
     // MARK: - Properties
+    
+    @Environment(\.dismiss) var dismiss
+    
     @Bindable var signupViewModel: SignupViewModel = .init()
     @FocusState var isNicknameFocused: Bool
     @FocusState var isEmailFocused: Bool
@@ -23,15 +26,24 @@ struct SignupView: View {
     // MARK: - body
     var body: some View {
         VStack {
+            toolbar
+            
+            Spacer()
+            // frame 넣기
+            
             textFieldGroup
             
             Spacer()
             
-            MainButton(text: "생성하기", height: 58, action: signupViewModel.signup)
+            MainButton(text: "생성하기", height: 58) {
+                signupViewModel.signup()
+                dismiss()
+            }
+            
         }
-        .safeAreaPadding(.top, 210)
         .safeAreaPadding(.bottom, 72)
         .safeAreaPadding(.horizontal, 19)
+        .navigationBarHidden(true)
     }
     
     // MARK: - textFieldGroup
@@ -41,6 +53,29 @@ struct SignupView: View {
             SignupTextField(text: $signupViewModel.signupModel.email, placeholder: "이메일", isFocused: $isEmailFocused)
             SignupTextField(text: $signupViewModel.signupModel.password, placeholder: "비밀번호", isFocused: $isPasswordFocused)
         }
+    }
+    
+    // TODO: - 여유 있을 때 커스텀 컴포넌트로 바꾸기
+    // MARK: - toolbar
+    private var toolbar: some View {
+        ZStack {
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(.chevron)
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                }
+                Spacer()
+            }
+            
+            Text("가입하기")
+                .font(.medium16)
+                .foregroundStyle(.black)
+        }
+        .frame(width: .infinity)
+        .padding(.top, 18)
     }
 }
 

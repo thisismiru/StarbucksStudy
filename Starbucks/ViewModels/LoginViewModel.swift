@@ -12,4 +12,7 @@ class LoginViewModel {
     // MARK: - Properties
     var id: String = ""
     var password: String = ""
+    
+    var validId: String = UserDefaults.standard.string(forKey: "email") ?? ""
+    var validPassword: String = UserDefaults.standard.string(forKey: "password") ?? ""
 }

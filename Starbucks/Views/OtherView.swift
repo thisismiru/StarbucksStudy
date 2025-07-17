@@ -11,6 +11,8 @@ import SwiftUI
 struct OtherView: View {
     
     // MARK: - Properties
+    @Environment(\.dismiss) var dismiss
+    
     @AppStorage("nickname") var nickname: String = ""
     
     // MARK: - body
@@ -32,9 +34,9 @@ struct OtherView: View {
             Spacer()
             
             Button {
-                print("로그아웃")
+                dismiss()
             } label: {
-                Image("logout")
+                Image(.logout)
                     .resizable()
                     .frame(width: 35, height: 35)
             }
@@ -59,7 +61,6 @@ struct OtherView: View {
                 Spacer()
                 
                 costomerSupportSection
-                Spacer()
             }
             .padding(.top, 41)
             .padding(.bottom, 41)
@@ -75,6 +76,7 @@ struct OtherView: View {
                 + Text(" 님")
                     .font(.semiBold24)
                     .foregroundStyle(.black02)
+                
                 HStack(spacing: 4) {
                     Text("환영합니다!")
                         .font(.semiBold24)
@@ -86,9 +88,9 @@ struct OtherView: View {
             }
             
             HStack(spacing: 11) {
-                MenuButton(text: "별 히스토리", image: "star_history")
-                MenuButton(text: "전자영수증", image: "receipt")
-                MenuButton(text: "나만의 메뉴", image: "my")
+                MenuButton(text: "별 히스토리", image: .starHistory)
+                MenuButton(text: "전자영수증", image: .receipt)
+                MenuButton(text: "나만의 메뉴", image: .my)
             }
         }
     }
@@ -107,19 +109,19 @@ struct OtherView: View {
     private var payBottomSection: some View {
         VStack {
             HStack {
-                MiniMenuButton(text: "스타벅스 카드 등록", image: "card")
+                MiniMenuButton(text: "스타벅스 카드 등록", image: .card)
                 
                 Spacer()
                 
-                MiniMenuButton(text: "카드 교환권 등록", image: "card_change")
+                MiniMenuButton(text: "카드 교환권 등록", image: .cardChange)
             }
             
             HStack {
-                MiniMenuButton(text: "쿠폰 등록", image: "coupon")
+                MiniMenuButton(text: "쿠폰 등록", image: .coupon)
                 
                 Spacer()
                 
-                MiniMenuButton(text: "쿠폰 히스토리", image: "conpon_history")
+                MiniMenuButton(text: "쿠폰 히스토리", image: .conponHistory)
             }
         }
     }
@@ -138,23 +140,23 @@ struct OtherView: View {
     private var costomerSupportBottomSection: some View {
         VStack {
             HStack {
-                MiniMenuButton(text: "스토어 케어", image: "store_care")
+                MiniMenuButton(text: "스토어 케어", image: .storeCare)
                 
                 Spacer()
                 
-                MiniMenuButton(text: "고객의 소리", image: "customer")
+                MiniMenuButton(text: "고객의 소리", image: .customer)
             }
             
             HStack {
-                MiniMenuButton(text: "매장 정보", image: "store_info")
+                MiniMenuButton(text: "매장 정보", image: .storeInfo)
                 
                 Spacer()
                 
-                MiniMenuButton(text: "반납기 정보", image: "return_info")
+                MiniMenuButton(text: "반납기 정보", image: .returnInfo)
             }
             
             HStack {
-                MiniMenuButton(text: "마이 스타벅스 리뷰", image: "my_review")
+                MiniMenuButton(text: "마이 스타벅스 리뷰", image: .myReview)
                 
                 Spacer()
             }
@@ -165,7 +167,7 @@ struct OtherView: View {
 
 fileprivate struct MenuButton: View {
     var text: String
-    var image: String
+    var image: UIImage
     
     var body: some View {
         Button {
@@ -176,7 +178,7 @@ fileprivate struct MenuButton: View {
                     .foregroundStyle(.white)
                 
                 VStack(spacing: 4) {
-                    Image(image)
+                    Image(uiImage: image)
                         .resizable()
                         .frame(width: 48, height: 48)
                     Text(text)
@@ -191,14 +193,14 @@ fileprivate struct MenuButton: View {
 
 fileprivate struct MiniMenuButton: View {
     var text: String
-    var image: String
+    var image: UIImage
     
     var body: some View {
         Button {
             print(text)
         } label: {
             HStack(spacing: 4) {
-                Image(image)
+                Image(uiImage: image)
                     .resizable()
                     .frame(width: 32, height: 32)
                 Text(text)

@@ -16,7 +16,7 @@ struct PopupView: View {
     // MARK: - body
     var body: some View {
         VStack {
-            Image("popup")
+            Image(.popup)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(height: 720)

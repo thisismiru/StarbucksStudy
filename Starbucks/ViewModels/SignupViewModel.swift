@@ -16,9 +16,12 @@ class SignupViewModel {
     
     // MARK: - Functions
     func signup() {
-        UserDefaults.standard.set(signupModel.nickname, forKey: "nickname")
-        UserDefaults.standard.set(signupModel.email, forKey: "email")
-        UserDefaults.standard.set(signupModel.password, forKey: "password")
+        if (signupModel.nickname != "") && (signupModel.email != "") && (signupModel.password != "") {
+            UserDefaults.standard.set(signupModel.nickname, forKey: "nickname")
+            UserDefaults.standard.set(signupModel.email, forKey: "email")
+            UserDefaults.standard.set(signupModel.password, forKey: "password")
+            print(signupModel.nickname, signupModel.email, signupModel.password)
+        }
     }
     
 }
